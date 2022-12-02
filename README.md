@@ -106,5 +106,10 @@ Below I have included parts of code I actually wrote while on this project, alon
   </p>
   ```
   
-  By this point, I had implemented both the models, as well as created CRUD pages for each of them. At this point, these pages were fully functional, and were able to
+  By now, I had implemented both the models, as well as created CRUD pages for each of them. At this point, these pages were fully functional, and were able to create, read, update, and delete items from the database. After creating the models and scaffolding the views, I was also tasked with styling the front end to make it more attractive and create a better user experience.
+  
+# Front-End
+- ## Rental Requests
+  I was eventually tasked with making the Rental Requests Index page look better by turning the default display into an accordion. To do this, I needed to 
+  
   
