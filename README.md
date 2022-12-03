@@ -164,8 +164,42 @@ Below I have included parts of code I actually wrote while on this project, alon
   The rest of the work I did mostly involved adding classes to various HTML elements as well as creating more if/else statements to make sure nothing was displayed   incorrectly.
   
 - ## Rental History
+  For Rental History, I was tasked with something a bit different. I was to style the create and edit pages for rental histories, and dynamically update text on the pages depending on the state of a checkbox. Below you can see the result:
   
+  ![Create Rental History Page](damage.gif)
   
+  This form mainly utilized Bootstrap and custom CSS to achieve the final appearance. However, as with the accordion I just detailed before this, the JavaScript was the important part. This time, though, the process was a bit simpler:
+  
+  ```
+  // Create/Edit Rental History page
+
+  function toggleNotes() {
+      var label = document.getElementById("RentalHistory-Create--label");
+      var checkbox = document.getElementById("RentalHistory-Create--checkbox");
+
+      if (checkbox.checked) {
+          label.innerHTML = "Damages Incurred";
+      }
+      else if (!checkbox.checked) {
+          label.innerHTML = "Notes";
+      }
+  }
+  ```
+  
+  This code alone would work for the Create page, but I quickly realized that I would need to make a minor adjustment for the Edit page. Since the function was only   being called when the HTML element was being clicked on, if a user decided to edit an already existing item, the checkbox could already be checked. Therefore,       "Damages Incurred" would not be displayed until the user clicked on the checkbox twice in this instance, which was clearly not desired. To fix this, I also had     the function be called on page load:
+  
+  ```
+  window.addEventListener('load', function () {
+    toggleNotes();
+  });
+  ```
+  
+  This made the feature work as intended.
+  
+  As an additional note, I was also tasked with styling the Donation page form, but it was very similar in appearance to the Rental History form shown above, so I     will not go into detail about it here.
+  
+# Conclusions/Takeaways
+This was the second Live Project I participated in as part of my curriculum at The Tech Academy, the first being the Python Live Project. As a result, I came into this project feeling much more prepared, and overall, I feel that it went more smoothly. However, that is not to understate how helpful this Live Project was as well. Working with a completely different language from the last project really helped to reinforce the process of software development, but from a slightly different perspective. I also feel that I learned just as much, if not more, than the previous project. Not only did I learn more about and improve my C# skills, but I also gained more knowledge about ASP.NET, Entity Framework, and several other useful tools and technologies. I am really grateful to have had the opportunity to undertake two separate Live Projects, and feel much more confident in my skills as a developer because of it.
 
   
   
