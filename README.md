@@ -142,7 +142,7 @@ Below I have included parts of code I actually wrote while on this project, alon
   });
   ```
   
-  The Index.cshtml file was already scaffolded for me, but I had to then add additional logic to the file using Razor syntax:
+  The Index.cshtml file was already scaffolded for me, but I had to then add additional logic to the file using Razor syntax, such as this:
   
   ```
   @foreach (var item in Model.Where(i => ((i.EndTime.AddDays(7)) > (DateTime.Now))).OrderBy(i => i.StartTime))
@@ -160,6 +160,9 @@ Below I have included parts of code I actually wrote while on this project, alon
                 var timeRemaining = endTime - DateTime.Now;
             }
   ```
+  
+  The rest of the work I did mostly involved adding classes to various HTML elements as well as creating more if/else statements to make sure nothing was displayed   incorrectly.
+  
 - ## Rental History
   
   
