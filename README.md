@@ -106,10 +106,65 @@ Below I have included parts of code I actually wrote while on this project, alon
   </p>
   ```
   
-  By now, I had implemented both the models, as well as created CRUD pages for each of them. At this point, these pages were fully functional, and were able to create, read, update, and delete items from the database. After creating the models and scaffolding the views, I was also tasked with styling the front end to make it more attractive and create a better user experience.
+  By now, I had implemented both the models, as well as created CRUD pages for each of them. At this point, these pages were fully functional, and were able to       create, read, update, and delete items from the database. After creating the models and scaffolding the views, I was also tasked with styling the front end to       make it more attractive and create a better user experience.
   
 # Front-End
 - ## Rental Requests
-  I was eventually tasked with making the Rental Requests Index page look better by turning the default display into an accordion. To do this, I needed to 
+  I was eventually tasked with making the Rental Requests Index page look better by turning the default display into an accordion. To do this, I needed to utilize     both CSS and JavaScript to achieve the desired effect. Additionally, the entries making up the accordion were to be sorted by start date in ascending order.         There also needed to be a button on the page that toggled between displaying current rental requests and those where over a week had passed since they               ended. Here is the final product:
+  
+  ![Rental Requests Index Accordion](accordion.gif)
+  
+  There was a lot of CSS needed to achieve the look of the page, but I won't go into much detail here since it's relatively mundane. The main thing to note is that   I used Bootstrap's grid system in order to position a lot of the elements, as well as `display: flex;` using CSS. The JavaScript, however, was a little more         involved. To achieve the dropdown effect of the accordion, I used this code:
+  
+  ```
+  var acc = document.getElementsByClassName("RentalRequest-Index--accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+      });
+  }
+  ```
+  
+  To add the functionality of the button to toggle between current and expired rental requests, I used if/else statements to simply either display or hide the         current/expired rental requests depending on the state of a boolean value corresponding to what was being shown. Finally, to ensure that the expired rental         requests were not shown when first visiting the page, I added a simple function to hide the expired requests, and called it when the page loaded like this:
+  
+  ```
+  window.addEventListener('load', function () {
+    loadDisplay();
+  });
+  ```
+  
+  The Index.cshtml file was already scaffolded for me, but I had to then add additional logic to the file using Razor syntax:
+  
+  ```
+  @foreach (var item in Model.Where(i => ((i.EndTime.AddDays(7)) > (DateTime.Now))).OrderBy(i => i.StartTime))
+  ```
+  
+  I also had to do some minor conversions in order to accurately represent the time remaining on the rental requests:
+  
+  ```
+  <!--Using .Ticks to properly convert to DateTime-->
+            @{
+                DateTime startTime = new DateTime(item.StartTime.Ticks);
+                var timeUntilStart = startTime - DateTime.Now;
+
+                DateTime endTime = new DateTime(item.EndTime.Ticks);
+                var timeRemaining = endTime - DateTime.Now;
+            }
+  ```
+- ## Rental History
+  
+  
+
+  
+  
   
   
